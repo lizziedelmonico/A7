@@ -1,7 +1,5 @@
 import java.util.Collections;
 
-// import javax.smartcardio.Card;
-
 /**
  * Program pretends to sort cards, and demonstrates use of a recorder.
  *
