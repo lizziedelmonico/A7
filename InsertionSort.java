@@ -10,17 +10,24 @@ public class InsertionSort {
 
     // Here is the result list you will be creating
     CardPile sorted = new CardPile();
-    Card current = unsorted.getFirst();
+    
     
     
     while(!unsorted.isEmpty()){
-      ListIterator<Card> position = unsorted.listIterator();
-      ListIterator<Card> sort_pos = sorted.listIterator();
-      Card pos_card = position.next();
-      Card sort_card = sort_pos.next();
+      Card current = unsorted.getFirst();
+      ListIterator<Card> sort_pos = sorted.listIterator(sorted.size());
+      Card sort_first = sorted.getFirst();
 
-      if(pos_card.compareTo(sort_card) <= 0 &&){
-        
+      unsorted.remove(current);
+
+      if(current.compareTo(sort_first) <= 0){
+        sorted.add(current);
+      } else{
+        Card prev = sort_pos.previous();
+        while(sort_pos.hasPrevious() && current.compareTo(prev) > 0){
+          prev = sort_pos.previous();
+        }
+        sorted.add(current);
       }
 
     }
@@ -30,7 +37,7 @@ public class InsertionSort {
     return sorted;
   }
 
-    public static void main(String args[]) {
+    public static void main(String args[]){
 
     // set up a class to record and display the sorting results
     SortRecorder recorder = new SortRecorder();
@@ -50,12 +57,12 @@ public class InsertionSort {
     Card[] card_arr = cards.toArray(new Card[0]);
 
     // in your program, this would be a call to a real sorting algorithm
-    cards = FakeSort.sort(cards, recorder);
+    cards = InsertionSort.sort(cards, recorder);
 
     // We can print out the (un)sorted result:
     System.out.println(cards);
 
     // make window appear showing the record
-    recorder.display("Card Sort Demo: FakeSort");
+    recorder.display("Card Sort: Insertion Sort");
   }
 }
