@@ -2,7 +2,7 @@ import java.util.*;
 
 public class SelectionSort {
   
-  public static CardPile sort(CardPile unsorted, SortRecorder record) {
+  public static CardPile sort(CardPile unsorted, SortRecorder record) throws NoSuchElementException{
     
     // register the starting configuration with the recorder
     record.add(unsorted);
@@ -32,5 +32,16 @@ public class SelectionSort {
     System.out.println(sorted);
     return sorted;
   
+  }
+
+  public static void main(String[] args){
+    SortRecorder recorder = new SortRecorder();
+    Card.loadImages(recorder);
+    CardPile cards = new CardPile(Card.newDeck(true), 2, 2);
+    Collections.shuffle(cards);
+    Card[] card_arr = cards.toArray(new Card[0]);
+    cards = sort(cards, recorder);
+    System.out.println(cards);
+
   }
 }

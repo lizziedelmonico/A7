@@ -14,11 +14,15 @@ public class InsertionSort {
     
     
     while(!unsorted.isEmpty()){
-      for(ListIterator<Card> position = unsorted.listIterator(); position.hasNext();){
-        Card temp = position.next();
-        sorted.add(current);
-        current = temp;
+      ListIterator<Card> position = unsorted.listIterator();
+      ListIterator<Card> sort_pos = sorted.listIterator();
+      Card pos_card = position.next();
+      Card sort_card = sort_pos.next();
+
+      if(pos_card.compareTo(sort_card) <= 0 &&){
+        
       }
+
     }
     
     
