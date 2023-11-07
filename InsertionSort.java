@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.util.ListIterator;
+import java.util.*;
 
 public class InsertionSort {
   
@@ -10,14 +11,16 @@ public class InsertionSort {
 
     // Here is the result list you will be creating
     CardPile sorted = new CardPile();
+    Card current = unsorted.getFirst();
+    unsorted.remove(current);
+    sorted.add(current);
+    Card sort_first = sorted.getFirst();
+
     
     
     
     while(!unsorted.isEmpty()){
-      Card current = unsorted.getFirst();
       ListIterator<Card> sort_pos = sorted.listIterator(sorted.size());
-      Card sort_first = sorted.getFirst();
-
       unsorted.remove(current);
 
       if(current.compareTo(sort_first) <= 0){
@@ -37,7 +40,7 @@ public class InsertionSort {
     return sorted;
   }
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws NoSuchElementException{
 
     // set up a class to record and display the sorting results
     SortRecorder recorder = new SortRecorder();

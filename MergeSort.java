@@ -1,10 +1,12 @@
 import java.util.ArrayDeque;
+import java.util.*;
 
 public class MergeSort {
   
   public static CardPile sort(CardPile unsorted, SortRecorder record) {
     
     ArrayDeque<CardPile> queue = new ArrayDeque<CardPile>();
+    CardPile sorted = new CardPile();
   
     // ***********************************************************
     // Here is where you'll do the "work" of MergeSort:
@@ -16,6 +18,22 @@ public class MergeSort {
     //           record.add(pile);
     //        }
     // ***********************************************************
+
+    for(ListIterator<Card> iterator = unsorted.listIterator(); iterator.hasNext();){
+      CardPile a = new CardPile();
+      queue.add(a);
+    } while(queue.size() > 1){
+      CardPile one = queue.remove();
+      CardPile two = queue.remove();
+      if(one.getFirst().compareTo(two.getFirst()) > 0){
+        sorted.add(one.getFirst());
+      }
+
+    }
+
+
+
+
 
     // return the sorted result here
     return queue.remove();
