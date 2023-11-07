@@ -1,43 +1,63 @@
+import java.util.Collections;
 public class Quicksort {
   
   public static CardPile sort(CardPile unsorted, SortRecorder record) {
+    record.add(unsorted);
+    record.next();
 
-    // ***********************************************************
-    // Here is where you'll check the stop condition and return
-    // if it is satisfied.
-    // ***********************************************************
-    
-    // Here are the two partitions you will be creating
+    CardPile result = quickSortCards(unsorted, record);
+
+
+    record.add(result);
+    return result;
+  }
+  public static CardPile quickSortCards(CardPile unsorted, SortRecorder record){
+    if(unsorted.size() < 2){
+      return unsorted; 
+    }
+    Card pivot = unsorted.removeFirst(); 
     CardPile smaller = new CardPile();
     CardPile bigger = new CardPile();
-
-    // ***********************************************************
-    // Here is where you'll do the partition part of Quicksort:
-    //   - Choose a pivot
-    //   - Partition the unsorted list into two piles
-    // ***********************************************************
-    Card pivot = null;  // edit this!
-    
-    // register the partitions with the recorder
+    while(!unsorted.isEmpty()){
+      Card unSCard = unsorted.removeFirst(); 
+      if(unSCard.compareTo(pivot) < 0){
+        smaller.add(unSCard);
+      }else{
+        bigger.add(unSCard);
+      }
     record.add(smaller);
     record.add(pivot);
     record.add(bigger);
     record.next();
+    }
+    CardPile results = new CardPile();
+    results.append(quickSortCards(smaller, record));
+    results.add(pivot);
+    results.append(quickSortCards(bigger, record));
+    return results;
+  }
+  
+  
+  public static void main(String[] args) {
+    SortRecorder recorder = new SortRecorder();
 
-    // This will hold the assembled result
-    CardPile result = new CardPile();
-    
-    // ***********************************************************
-    // Here is where you'll do the remaining work of Quicksort:
-    //   - Make recursive calls on the partitions
-    //   - Assemble the sorted results into a single pile
-    // ***********************************************************
 
-    // record the sorted result
-    record.add(result);
-    record.next();
-    
-    // return the sorted result here
-    return result;
+    Card.loadImages(recorder);
+    CardPile cards = new CardPile(Card.newDeck(true), 2, 2);
+
+
+
+    Collections.shuffle(cards);
+
+
+    Card[] card_arr = cards.toArray(new Card[0]);
+
+    cards = Quicksort.sort(cards, recorder);
+
+
+    System.out.println(cards);
+
+
+    recorder.display("Card Sort Demo: QuickSort");
   }
 }

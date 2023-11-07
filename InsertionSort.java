@@ -1,5 +1,3 @@
-import java.util.Collections;
-import java.util.ListIterator;
 import java.util.*;
 
 public class InsertionSort {
@@ -11,28 +9,29 @@ public class InsertionSort {
 
     // Here is the result list you will be creating
     CardPile sorted = new CardPile();
-    Card current = unsorted.getFirst();
-    unsorted.remove(current);
-    sorted.add(current);
-    Card sort_first = sorted.getFirst();
 
     
     
-    
-    while(!unsorted.isEmpty()){
-      ListIterator<Card> sort_pos = sorted.listIterator(sorted.size());
-      unsorted.remove(current);
-
-      if(current.compareTo(sort_first) <= 0){
-        sorted.add(current);
-      } else{
-        Card prev = sort_pos.previous();
-        while(sort_pos.hasPrevious() && current.compareTo(prev) > 0){
-          prev = sort_pos.previous();
-        }
-        sorted.add(current);
+    while(unsorted.size() > 0){
+      Card c = unsorted.getFirst();
+      unsorted.remove(c);
+      if(sorted.size() == 0){
+        sorted.add(c);
       }
-
+      for(int index = 0; index < sorted.size();){
+        if(sorted.size() == 0){
+          sorted.add(c);
+        }
+        Card d = sorted.get(index);
+        if(c.compareTo(d) < 0){
+          sorted.add(index, c);
+          index = index-1;
+        } 
+      }
+  
+      record.next();
+      record.add(sorted);
+      record.add(unsorted);
     }
     
     
