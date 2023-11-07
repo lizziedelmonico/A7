@@ -21,14 +21,15 @@ public class SelectionSort {
         if(c.compareTo(min) < 0){
           min = c;
           index = position.previousIndex();
-        } 
+        }
+      }
         sorted.add(min);
         unsorted.remove(index);
         record.next();
         record.add(sorted);
         record.add(unsorted);
-      }
-
+      
+    
   
 
     }
