@@ -1,5 +1,8 @@
+import java.util.*;
+
+/* Initializes the timer for the SelectionSort method */
 public class SelectionSortTimer {
-      /** Starts the program running */
+    /** Starts the program running */
   public static void main(String args[]) {
     
     if (args.length<1) {
@@ -18,22 +21,32 @@ public class SelectionSortTimer {
     }
   }
 
-  /** This method actually doesn't sort at all */
-  public static CardPile sort(CardPile unsorted) {
-    
-    // Now move cards from one list to another, 
-    // and use the recorder to record the steps along the way.
-    // In a real implementation, you would actually sort the list.
-    // Here, we just move them in the same order they came in
+  /**
+   * Sorts the given cards using the previously written selection sort method (without the record)
+   * @param unsorted  The unsorted card pile
+   * @return  The sorted card pile
+   */
+  public static CardPile sort(CardPile unsorted){
+
+    // Here is the result list you will be creating
     CardPile sorted = new CardPile();
-      
-    while (unsorted.size() > 0) {
-      // move one card between piles
-      sorted.add(unsorted.removeFirst());
 
+
+    while(unsorted.size() > 0){
+      ListIterator<Card> position = unsorted.listIterator();
+      Card min = unsorted.getFirst();
+      Card c = min;
+      int index = 0;
+      while(position.hasNext()){
+        c = position.next();
+        if(c.compareTo(min) < 0){
+          min = c;
+          index = position.previousIndex();
+        }
+      }
+        sorted.add(min);
+        unsorted.remove(index);
     }
-
-    // return the (un)sorted result here
     return sorted;
   }
 }

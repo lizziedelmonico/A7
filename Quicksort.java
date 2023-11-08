@@ -1,6 +1,13 @@
 import java.util.Collections;
+/* Sorts the given card pile by using quick sort methods */
 public class Quicksort {
   
+  /**
+   * Sorts a card pile using quick sort techniques
+   * @param unsorted  The unsorted card pile
+   * @param record  Keeps track of the changes being made to the card pile
+   * @return  The sorted card pile
+   */
   public static CardPile sort(CardPile unsorted, SortRecorder record) {
     record.add(unsorted);
     record.next();
@@ -16,24 +23,24 @@ public class Quicksort {
       return unsorted; 
     }
     Card pivot = unsorted.removeFirst(); 
-    CardPile smaller = new CardPile();
-    CardPile bigger = new CardPile();
+    CardPile small = new CardPile();
+    CardPile big = new CardPile();
     while(!unsorted.isEmpty()){
-      Card unSCard = unsorted.removeFirst(); 
-      if(unSCard.compareTo(pivot) < 0){
-        smaller.add(unSCard);
+      Card unsortCard = unsorted.removeFirst(); 
+      if(unsortCard.compareTo(pivot) < 0){
+        small.add(unsortCard);
       }else{
-        bigger.add(unSCard);
+        big.add(unsortCard);
       }
-    record.add(smaller);
+    record.add(small);
     record.add(pivot);
-    record.add(bigger);
+    record.add(big);
     record.next();
     }
     CardPile results = new CardPile();
-    results.append(quickSortCards(smaller, record));
+    results.append(quickSortCards(small, record));
     results.add(pivot);
-    results.append(quickSortCards(bigger, record));
+    results.append(quickSortCards(big, record));
     return results;
   }
   
@@ -53,9 +60,6 @@ public class Quicksort {
     Card[] card_arr = cards.toArray(new Card[0]);
 
     cards = Quicksort.sort(cards, recorder);
-
-
-    System.out.println(cards);
 
 
     recorder.display("Card Sort Demo: QuickSort");

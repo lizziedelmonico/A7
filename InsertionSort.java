@@ -1,7 +1,14 @@
 import java.util.*;
 
+/* Sorts a deck of cards using the insertion method */
 public class InsertionSort {
   
+  /**
+   * Sorts the given card pile using insertion techniques
+   * @param unsorted  The unsorted card pile that will be sorted
+   * @param record    Keeps track of the changes being made to the card pile
+   * @return   The sorted card pile
+   */
   public static CardPile sort(CardPile unsorted, SortRecorder record) {
     
     // register the starting configuration with the recorder
@@ -15,15 +22,15 @@ public class InsertionSort {
     
     while(unsorted.size() > 0){
       c = unsorted.removeFirst();
-      ListIterator<Card> cardIterator1 = sorted.listIterator();
-      Card curCard = cardIterator1.next();
-      while (cardIterator1.hasNext() && (c.compareTo(curCard) > 0)){
-        curCard = cardIterator1.next();
+      ListIterator<Card> position = sorted.listIterator();
+      Card current = position.next();
+      while (position.hasNext() && (c.compareTo(current) > 0)){
+        current= position.next();
       }
-      if(c.compareTo(curCard) < 0){
-        cardIterator1.previous();
+      if(c.compareTo(current) < 0){
+        position.previous();
   
-      cardIterator1.add(c);
+      position.add(c);
       record.next();
       record.add(sorted);
       record.add(unsorted);
@@ -55,9 +62,6 @@ public class InsertionSort {
 
     // in your program, this would be a call to a real sorting algorithm
     cards = InsertionSort.sort(cards, recorder);
-
-    // We can print out the (un)sorted result:
-    System.out.println(cards);
 
     // make window appear showing the record
     recorder.display("Card Sort: Insertion Sort");

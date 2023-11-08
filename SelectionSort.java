@@ -1,7 +1,14 @@
 import java.util.*;
 
+/* Sorts the given card pile by using selection sort methods */
 public class SelectionSort {
   
+  /**
+   * Sorts a card pile using selection sort techniques
+   * @param unsorted  The unsorted card pile
+   * @param record    Keeps track of the changes being made to the card pile
+   * @return    The sorted card pile
+   */
   public static CardPile sort(CardPile unsorted, SortRecorder record){
     
     // register the starting configuration with the recorder
@@ -28,9 +35,6 @@ public class SelectionSort {
         record.next();
         record.add(sorted);
         record.add(unsorted);
-      
-    
-  
 
     }
 
@@ -61,9 +65,6 @@ public class SelectionSort {
   
       // in your program, this would be a call to a real sorting algorithm
       cards = SelectionSort.sort(cards, recorder);
-  
-      // We can print out the (un)sorted result:
-      System.out.println(cards);
   
       // make window appear showing the record
       recorder.display("Card Sort Demo: Selection Sort");

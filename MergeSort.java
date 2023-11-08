@@ -1,11 +1,20 @@
 import java.util.Collections;
 import java.util.ArrayDeque;
 
+/* Sorts the given card pile using merge sort methods */
 public class MergeSort {
 
+  /* The first individual card pile */
   CardPile l1;
+  /* The second individual card pile */
   CardPile l2;
 
+  /**
+   * Sorts a card pile using merge sort techniques
+   * @param unsorted   The unsorted card pile
+   * @param record    Keeps track of the changes being made to the card pile
+   * @return    The sorted card pile
+   */
   public static CardPile sort(CardPile unsorted, SortRecorder record) {
 
     ArrayDeque<CardPile> queue = new ArrayDeque<CardPile>();
@@ -21,11 +30,11 @@ public class MergeSort {
     record.add(unsorted);
 
     while (queue.size() > 1) {
-      CardPile l1 = queue.removeFirst();
-      CardPile l2 = queue.removeFirst();
+      CardPile one = queue.removeFirst();
+      CardPile two = queue.removeFirst();
 
 
-      CardPile mergedList = merge(l1, l2);
+      CardPile mergedList = merge(one, two);
       queue.push(mergedList);
       record.add(mergedList);
 
@@ -39,32 +48,32 @@ public class MergeSort {
     return queue.remove();
   }
 
-  public static CardPile merge(CardPile l1, CardPile l2) {
+  public static CardPile merge(CardPile one, CardPile two) {
     CardPile mergedList = new CardPile();
 
-    while (l1.size() > 0 && l2.size() > 0) {
+    while (one.size() > 0 && two.size() > 0) {
 
 
-      if (l1.getFirst().compareTo(l2.getFirst()) == 0) {
-        mergedList.add(l1.removeFirst());
-        mergedList.add(l2.removeFirst());
+      if (one.getFirst().compareTo(two.getFirst()) == 0) {
+        mergedList.add(one.removeFirst());
+        mergedList.add(two.removeFirst());
       }
 
-      else if (l1.getFirst().compareTo(l2.getFirst()) < 0) {
+      else if (one.getFirst().compareTo(two.getFirst()) < 0) {
 
-        mergedList.add(l1.removeFirst());
+        mergedList.add(one.removeFirst());
 
       }
 
-      else if (l1.getFirst().compareTo(l2.getFirst()) > 0) {
-        mergedList.add(l2.removeFirst());
+      else if (one.getFirst().compareTo(two.getFirst()) > 0) {
+        mergedList.add(two.removeFirst());
 
       }
     }
 
 
-    mergedList.append(l1);
-    mergedList.append(l2);
+    mergedList.append(one);
+    mergedList.append(two);
 
     return mergedList;
   }
@@ -92,9 +101,6 @@ public class MergeSort {
 
     // in your program, this would be a call to a real sorting algorithm
     cards = MergeSort.sort(cards, recorder);
-
-    // We can print out the (un)sorted result:
-    System.out.println(cards);
 
     // make window appear showing the record
     recorder.display("MergeSort");

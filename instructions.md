@@ -147,7 +147,7 @@ You can time a program on unix-based systems (like the one driving repl.it) by p
 
 
 ```> time java MergeSortTimer 10000```
-
+``
 
 This will print out a rather cryptic result, with timing numbers in different orders depending on the system. On replit, the first number (labeled `real`) gives the actual time elapsed. The second number (labeled `user`) gives the time spent running the program by the CPU, which is the number you are most interested in. The third number (labeled `sys`) gives the amount of time spent in system calls. If you're running your code on your own computer, the information provided may be somewhat different, but you should still be able to figure out which number is the CPU time.
 
