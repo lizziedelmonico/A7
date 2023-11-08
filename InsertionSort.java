@@ -9,33 +9,28 @@ public class InsertionSort {
 
     // Here is the result list you will be creating
     CardPile sorted = new CardPile();
+    Card c = unsorted.removeFirst();
+    sorted.add(c);
 
     
-    
     while(unsorted.size() > 0){
-      Card c = unsorted.getFirst();
-      unsorted.remove(c);
-      if(sorted.size() == 0){
-        sorted.add(c);
+      c = unsorted.removeFirst();
+      ListIterator<Card> cardIterator1 = sorted.listIterator();
+      Card curCard = cardIterator1.next();
+      while (cardIterator1.hasNext() && (c.compareTo(curCard) > 0)){
+        curCard = cardIterator1.next();
       }
-      for(int index = 0; index < sorted.size();){
-        if(sorted.size() == 0){
-          sorted.add(c);
-        }
-        Card d = sorted.get(index);
-        if(c.compareTo(d) < 0){
-          sorted.add(index, c);
-          index = index-1;
-        } 
-      }
+      if(c.compareTo(curCard) < 0){
+        cardIterator1.previous();
   
+      cardIterator1.add(c);
       record.next();
       record.add(sorted);
       record.add(unsorted);
     }
     
-    
-    // return the sorted result here
+  
+    }
     return sorted;
   }
 
